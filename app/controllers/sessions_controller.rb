@@ -6,9 +6,15 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:session][:email])
     if user && user.authenticate(params[:session][:password])
-      render plain: "súper lo lograste"
+      log_in(user)
+      redirect_to '/'
     else
       render plain: "no lo lograste"
     end
+  end
+
+  def destroy
+    log_out
+    redirect_to '/'
   end
 end
