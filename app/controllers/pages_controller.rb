@@ -1,7 +1,8 @@
 class PagesController < ApplicationController
+  before_action :logged_in_user
 
   def home
-      
+
   end
 
   def team
@@ -12,5 +13,11 @@ class PagesController < ApplicationController
 
   end
 
+  private
+  def logged_in_user
+    unless logged_in?
+      redirect_to '/'
+    end
+  end
 
 end
